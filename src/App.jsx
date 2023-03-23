@@ -43,7 +43,11 @@ const TodoList = () => {
       <div className="container">
         <AddTask addTodo={addTodo} />
         {todos.length > 0 ? (
-          <DisplayTasks todos={todos} removeTodo={removeTodo} />
+          <DisplayTasks
+            todos={todos}
+            removeTodo={removeTodo}
+            setTodos={setTodos}
+          />
         ) : null}
       </div>
     </>

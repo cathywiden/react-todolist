@@ -10,7 +10,9 @@ functionality
 [ ] sort tasks
 [ ] toggle between pending/complete
 [x] timestamp entries for easy manipulation -- Date.now() on add
-[ ] add timestamp to LS if I want to store the unique identifier
+[x] add timestamp to LS if I want to store the unique identifier
+[x] add prio flag, store in LS
+[ ] sort based on prio flag && timestamp
 
 general
 [x] basic styling

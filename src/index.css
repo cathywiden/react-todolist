@@ -65,12 +65,26 @@ footer {
   border-radius: 4px;
   cursor: pointer;
 }
+.priority-button {
+  height: 1rem;
+  border: none;
+  background: transparent;
+}
+
+.delete-button {
+  width: 30px;
+  padding: 2px;
+background-color: transparent;
+  color: rgb(252, 0, 0);
+  border: none;
+  cursor: pointer;
+}
 
 .form {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .form input {
