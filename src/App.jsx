@@ -20,7 +20,8 @@ const removeTodo = (index) => {
 };
 
   return (
-    <div className="App">
+    <div>
+      <h1>to-do list</h1>
       <AddTask addTodo={addTodo} />
       <DisplayTasks todos={todos} removeTodo={removeTodo} />
     </div>
