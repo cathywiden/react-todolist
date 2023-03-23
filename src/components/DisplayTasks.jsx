@@ -6,7 +6,7 @@ const DisplayTasks = ({ todos, removeTodo }) => {
       {todos.map((todo, index) => (
         <li key={index}>
           {todo.text}
-          <button onClick={() => removeTodo(index)}>Delete</button>
+          <button onClick={() => removeTodo(todo.id)}>Delete</button>
         </li>
       ))}
     </ul>

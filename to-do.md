@@ -5,10 +5,12 @@ functionality
 [x] disallow adding blank tasks
 [x] delete items
 [x] use localstorage 
-[ ] Lifting State Up
+[x] Lifting State Up
 [ ] mark tasks as complete
 [ ] sort tasks
 [ ] toggle between pending/complete
+[x] timestamp entries for easy manipulation -- Date.now() on add
+[ ] add timestamp to LS if I want to store the unique identifier
 
 general
 [ ] basic styling
@@ -18,4 +20,5 @@ general
 
 misc
 [ ] pop alert upon trying to add blank entries
+[ ] pop alert upon adding duplicates
 [x] no SPA is complete without a footer
