@@ -2,28 +2,30 @@ import React, { useState } from "react";
 import AddTask from "./components/AddTask";
 import DisplayTasks from "./components/DisplayTasks";
 
-function App() {
-  const [todos, setTodos] = useState([]);
+const App = () => {
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
 
   const addTodo = (todo) => {
-    setTodos((prevTodos) => [...prevTodos, todo]);
+    setTodos([...todos, todo]);
+    localStorage.setItem("todos", JSON.stringify([...todos, todo]));
   };
 
-  const removeTodo = (index) => {
-    setTodos((prevTodos) => {
-      const newTodos = [...prevTodos];
-      newTodos.splice(index, 1);
-      return newTodos;
-    });
-  };
+const removeTodo = (index) => {
+  const updatedTodos = [...todos];
+  updatedTodos.splice(index, 1);
+  setTodos(updatedTodos);
+  localStorage.setItem("todos", JSON.stringify(updatedTodos));
+};
 
   return (
-    <div>
-      <h1>to-do list</h1>
+    <div className="App">
       <AddTask addTodo={addTodo} />
       <DisplayTasks todos={todos} removeTodo={removeTodo} />
     </div>
   );
-}
+};
+
 
 export default App;
