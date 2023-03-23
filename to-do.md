@@ -1,5 +1,5 @@
 functionality
-[ ] use at least 3 components
+[x] use at least 3 components
 [x] generate list -- DisplayTasks.jsx
 [x] add items -- AddTask.jsx
 [x] disallow adding blank tasks
@@ -13,7 +13,7 @@ functionality
 [ ] add timestamp to LS if I want to store the unique identifier
 
 general
-[ ] basic styling
+[x] basic styling
 [ ] structure
 [ ] clean up code
 

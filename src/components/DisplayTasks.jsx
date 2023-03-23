@@ -1,17 +1,26 @@
-import React from "react";
-
 const DisplayTasks = ({ todos, removeTodo }) => {
+  if (todos.length === 0) {
+    return null;
+  }
+
   return (
-    <ul>
-      {todos.map((todo, index) => (
-        <li key={index}>
-          {todo.text}
-          <button onClick={() => removeTodo(todo.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
+    <div className="tasks-container">
+      <div className="tasks">
+        {todos.map((todo, index) => (
+          <div key={index} className="task">
+            {todo.text}
+          </div>
+        ))}
+      </div>
+      <div className="buttons">
+        {todos.map((todo, index) => (
+          <button key={index} onClick={() => removeTodo(todo.id)}>
+            delete
+          </button>
+        ))}
+      </div>
+    </div>
   );
 };
-
 
 export default DisplayTasks;

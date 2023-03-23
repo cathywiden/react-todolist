@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 
-function AddTask({ addTodo }) {
+const AddTask = ({ addTodo }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.trim() !== "") { 
+    if (inputValue.trim() !== "") {
       addTodo({
         text: inputValue,
         completed: false,
       });
-      setInputValue(""); 
+      setInputValue("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button type="submit">Add Task</button>
-    </form>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button type="submit">add task</button>
+      </form>
+    </div>
   );
-}
+};
 
 export default AddTask;
