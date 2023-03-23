@@ -18,3 +18,4 @@ general
 
 misc
 [ ] pop alert upon trying to add blank entries
+[x] no SPA is complete without a footer
