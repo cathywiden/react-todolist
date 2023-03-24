@@ -82,7 +82,7 @@ const TodoList = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button className="sort-button" onClick={handleSort}>
-            {sortByPriority ? <span>&#x2605; up!</span> : "default"}
+            {sortByPriority ? <span>&#x2605;</span> : "default"}
           </button>
         </div>
         {filteredTodos.length > 0 ? (
