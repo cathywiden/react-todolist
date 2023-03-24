@@ -9,17 +9,19 @@ const TodoList = () => {
     JSON.parse(localStorage.getItem("todos")) || []
   );
 
-  const addTodo = (todo) => {
-    if (todo.text.trim() !== "") {
-      const timestamp = new Date().toLocaleString();
-      const newTodo = { ...todo, id: Date.now(), timestamp }; // add timestamp to new todo as uuid
-      const duplicateTodo = todos.find((a) => a.text === todo.text); 
-      if (!duplicateTodo) {
-        setTodos([...todos, newTodo]);
-        localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
-      }
+const addTodo = (todo) => {
+  if (todo.text.trim() !== "") {
+    const timestamp = new Date().toLocaleString();
+    const createdTimestamp = new Date().getTime(); // to calc. time items have been waiting since creation --> sort
+    const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
+    const duplicateTodo = todos.find((a) => a.text === todo.text);
+    if (!duplicateTodo) {
+      setTodos([...todos, newTodo]);
+      localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
     }
-  };
+  }
+};
+
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);

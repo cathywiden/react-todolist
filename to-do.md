@@ -5,17 +5,18 @@ functionality
 [x] disallow adding blank tasks
 [x] delete items
 [x] use localstorage 
-[x] Lifting State Up
+[x] lifting state up
 [x] mark tasks as complete
 [x] add toggle pending/complete
-[ ] sort tasks
 [x] auto sort: when a task is marked complete, move it down on the list
+[x] auto sort: pending tasks in order of longest waiting time since creation on top
+[x] sort completed entries on bottom
 [x] toggle between pending/complete
 [x] timestamp entries for easy manipulation -- Date.now() on add
 [x] add timestamp to LS if I want to store the unique identifier
 [x] add prio flag, store in LS
-[ ] sort based on prio flag && timestamp
-[ ] fix so that on editing entry no empty field is accepted
+[ ] manual sorting: sort pending && prio on top
+[ ] no empty field is accepted upon editing
 [ ] prio flag overrides timestamp. prio items always on top
 
 general

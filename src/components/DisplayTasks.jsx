@@ -15,46 +15,29 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
-
-const handleCompletion = (id) => {
-  const completedTask = todos.find((todo) => todo.id === id);
-  const updatedTodos = todos
-    .filter((todo) => todo.id !== id)
-
-    
-// completed tasks don't need to be sorted based on timestamp so I just add them to the bottom
-    .concat({ 
-      ...completedTask,
-      completed: !completedTask.completed,
-      timestamp: Date.now(),
-    })
-
-
-// I want to sort pending tasks so that oldest entry is on top when I toggle it back to pneding
-    .sort((a, b) => { 
-      if (a.completed === b.completed) {
-        if (!a.completed) {
-          if (a.priority !== b.priority) {
-            return b.priority - a.priority;
-          } else {
-            return a.timestamp - b.timestamp;
-          }
-        } else {
-          return 0;
-        }
-      } else if (a.completed) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-
-
-  setTodos(updatedTodos);
-  localStorage.setItem("todos", JSON.stringify(updatedTodos));
-};
-
-
+ const handleCompletion = (id) => {
+   const updatedTodos = todos
+     .map((todo) => {
+       if (todo.id === id) {
+         return {
+           ...todo,
+           completed: !todo.completed,
+           completedTimestamp: todo.completed ? null : new Date().getTime(),
+         };
+       }
+       return todo;
+     })
+     .sort((a, b) => {
+       // Sort pending todos by createdTimestamp in ascending order -- entry that ahs been waiting for the longest time is on top
+       if (!a.completed && !b.completed) {
+         return a.createdTimestamp - b.createdTimestamp;
+       }
+       // Sort pending todos before completed todos
+       return a.completed ? 1 : -1;
+     });
+   setTodos(updatedTodos);
+   localStorage.setItem("todos", JSON.stringify(updatedTodos));
+ };
 
 
 
