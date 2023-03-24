@@ -39,7 +39,7 @@ const TodoList = () => {
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
-    const removedTodo = todos.find((todo) => todo.id === id);
+    //const removedTodo = todos.find((todo) => todo.id === id);
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     //console.log(`Removed todo: ${removedTodo.text}`);

@@ -8,7 +8,7 @@ If you ever want to *catch up* with your newest additions -- which I hope you do
 
 You can override this default setting by flagging items as prio (see the stars to the left side?) and then clicking on the button that says "★ up!". This will allow you to see your personal prio items on the very top of your list.
 
-You can toggle between completed and pending status by clicking on the emjois. Hopefully, it is rather clear which emoji means which status 😅
+You can toggle between completed and pending status by clicking on the emojis. Hopefully, it is rather clear which emoji means which status 😅
 
 ========================================
 
@@ -17,7 +17,7 @@ You can toggle between completed and pending status by clicking on the emjois. H
 
 **LIFTING STATE UP**
 
-The *AddTask.jsx* component handles adding new tasks to the list. *DisplayTasks.jsx* handles displaying (rendering) the list of tasks, updates the status of tasks, and removes tasks The handleCompletion() in DisplayTasks.jsx is only responsible for sorting the todos when the user completes a task (marks an item completed or toggles it back to incomplete).
+The *AddTask.jsx* component handles adding new tasks to the list. *DisplayTasks.jsx* handles displaying (rendering) the list of tasks, updates the status of tasks, and removes tasks. The handleCompletion() in DisplayTasks.jsx is only responsible for sorting the todos when the user completes a task (marks an item completed or toggles it back to incomplete).
 
 The handleSort function in *App.jsx* is responsible for sorting the todos based on the selected sorting criteria, which is then passed down to DisplayTasks.jsx as a prop. By keeping the sorting logic in App.jsx, it allows the sorting itself to be done at the highest level. If in the future we have other components that also require access to the sorted todo list, we can pass it down as a prop from App.jsx.
 

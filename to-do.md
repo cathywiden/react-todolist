@@ -19,19 +19,16 @@ functionality
 [x] search
 [ ] auto refresh displayed list on prio flag add/deletion
 
-
 general
 [x] basic styling
 [x] structure
 [ ] clean up code
 [x] use at least 3 components
 
-
 misc
 [ ] alert upon trying to add blank entries
 [ ] alert upon adding duplicates
 [x] no SPA is complete without a footer
-
 
 bugs
 [ ] original list disappears if I change status on any item in a search (deleting works!)
