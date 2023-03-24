@@ -37,8 +37,6 @@ const TodoList = () => {
     }
   };
 
-
-
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     const removedTodo = todos.find((todo) => todo.id === id);
@@ -68,9 +66,6 @@ const TodoList = () => {
     setSortByPriority(!sortByPriority);
   };
 
-
-
-
   const filteredTodos = todos.filter((todo) =>
     todo.text.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -97,7 +92,7 @@ const TodoList = () => {
             setTodos={setTodos}
           />
         ) : (
-          <p>No results found.</p>
+          <p>no results found</p>
         )}
       </div>
     </>

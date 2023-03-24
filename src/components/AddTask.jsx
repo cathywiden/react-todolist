@@ -23,7 +23,6 @@ const AddTask = ({ addTodo }) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button type="submit">add task</button>
-        
       </form>
     </div>
   );
