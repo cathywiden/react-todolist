@@ -1,3 +1,18 @@
+========================================
+
+This to-do list will motivate you to get things done.
+
+Your entries are sorted by the time since you added them. This means that the app always pops up entries first that you've been postponing for the longest time. If you ever want to cacth up with your newest additions, you'll simply have to do the ones on the top of your list first. Hopefully, this will give you the incentive to get them out of the way so that you can get more productive in your everyday life.
+
+You can override this default setting by flagging items as prio (see the satr to the left side?) and then clicking on the button that "prio up". This will allow you to see your personal prio items on the very top of your list.
+
+You can toggle between completed and pending status.
+
+========================================
+
+
+
+
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-8d59dc4de5201274e310e4c54b9627a8934c3b88527886e3b421487c677d23eb.svg)](https://classroom.github.com/a/oPQSpNGz)
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10601446&assignment_repo_type=AssignmentRepo)
 # Todos
