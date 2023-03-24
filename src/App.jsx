@@ -9,30 +9,32 @@ const TodoList = () => {
     JSON.parse(localStorage.getItem("todos")) || []
   );
 
-const addTodo = (todo) => {
-  if (todo.text.trim() !== "") {
-    const timestamp = new Date().toLocaleString();
-    const createdTimestamp = new Date().getTime(); // to calc. time items have been waiting since creation --> sort
-    const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
-    const duplicateTodo = todos.find((a) => a.text === todo.text);
-    if (!duplicateTodo) {
-      const pendingTasks = todos.filter((task) => !task.completed);
+  const addTodo = (todo) => {
+    if (todo.text.trim() !== "") {
+      const timestamp = new Date().toLocaleString();
+      const createdTimestamp = new Date().getTime(); // to calc. time items have been waiting since creation --> sort
+      const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
+      const duplicateTodo = todos.find((a) => a.text === todo.text);
+      if (!duplicateTodo) {
+        const pendingTasks = todos.filter((task) => !task.completed);
 
-      // new addition := youngest pending task always goes to bottom of pending list
-      setTodos([...pendingTasks, newTodo, ...todos.slice(pendingTasks.length)]);
-      localStorage.setItem(
-        "todos",
-        JSON.stringify([
+        // new addition := youngest pending task always goes to bottom of pending list
+        setTodos([
           ...pendingTasks,
           newTodo,
           ...todos.slice(pendingTasks.length),
-        ])
-      );
+        ]);
+        localStorage.setItem(
+          "todos",
+          JSON.stringify([
+            ...pendingTasks,
+            newTodo,
+            ...todos.slice(pendingTasks.length),
+          ])
+        );
+      }
     }
-  }
-};
-
-
+  };
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);

@@ -36,15 +36,11 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
         return a.completed ? 1 : -1;
       });
 
-      
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
-
-
-  
-    return (
+  return (
     <div className="tasks-container">
       <div className="tasks">
         {todos.map((todo, index) => (
