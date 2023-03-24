@@ -62,7 +62,7 @@ const App = () => {
   return (
     <>
       <header className="App-header">
-        <h1>get it done</h1>
+        <h1>get things done</h1>
       </header>
       <main>
         <TodoList />
