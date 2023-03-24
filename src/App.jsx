@@ -42,7 +42,7 @@ const TodoList = () => {
     const removedTodo = todos.find((todo) => todo.id === id);
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    console.log(`Removed todo: ${removedTodo.text}`);
+    //console.log(`Removed todo: ${removedTodo.text}`);
   };
 
   const handleSort = () => {
