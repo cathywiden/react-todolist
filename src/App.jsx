@@ -8,7 +8,7 @@ const TodoList = () => {
     JSON.parse(localStorage.getItem("todos")) || []
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortByPriority, setSortByPriority] = useState(false);
+  const [sortByPriority, setSortByPriority] = useState(true);
 
   const addTodo = (todo) => {
     if (todo.text.trim() !== "") {
