@@ -6,9 +6,11 @@ functionality
 [x] delete items
 [x] use localstorage 
 [x] Lifting State Up
-[ ] mark tasks as complete
+[x] mark tasks as complete
+[x] add toggle pending/complete
 [ ] sort tasks
-[ ] toggle between pending/complete
+[x] auto sort: when a task is marked complete, move it down on the list
+[x] toggle between pending/complete
 [x] timestamp entries for easy manipulation -- Date.now() on add
 [x] add timestamp to LS if I want to store the unique identifier
 [x] add prio flag, store in LS
