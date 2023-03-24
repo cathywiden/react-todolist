@@ -15,15 +15,39 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
+  const handleCompletion = (id) => {
+    const updatedTodos = todos
+      .map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      })
+      .sort((a, b) => {
+        if (a.completed === b.completed) {
+          return 0;
+        } else if (a.completed) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  };
+
   return (
     <div className="tasks-container">
       <div className="tasks">
         {todos.map((todo, index) => (
           <div
             key={index}
-            className={`task${todo.completed ? " completed" : ""}${
-              todo.priority ? " priority" : ""
-            }`}
+            className={`task${
+              todo.completed ? " completed-item" : " incomplete-item"
+            }${todo.priority ? " priority" : ""}`}
           >
             <button
               className="priority-button"
@@ -31,14 +55,33 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
             >
               {todo.priority ? <span>&#x2605;</span> : <span>&#x2606;</span>}
             </button>
-            {todo.text}
+            <input
+              type="text"
+              value={todo.text}
+              className={`task-input${todo.completed ? " completed" : ""}`}
+              onChange={(e) =>
+                setTodos(
+                  todos.map((t) =>
+                    t.id === todo.id ? { ...t, text: e.target.value } : t
+                  )
+                )
+              }
+            />
+            <button
+              className="completion-button"
+              onClick={() => handleCompletion(todo.id)}
+            >
+              {todo.completed ? <span>&#x1F60E;</span> : <span>&#x1F614;</span>}
+            </button>
           </div>
         ))}
       </div>
       <div className="buttons">
         {todos.map((todo, index) => (
           <button
-            className="delete-button" key={index} onClick={() => removeTodo(todo.id)}
+            className="delete-button"
+            key={index}
+            onClick={() => removeTodo(todo.id)}
           >
             X
           </button>

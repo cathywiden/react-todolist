@@ -19,16 +19,7 @@ const TodoList = () => {
         localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
       }
     }
-
-    // checkpoint: get last three todos with their timestamps
-    const lastThreeTodos = todos.slice(-3).map((todo) => ({
-      text: todo.text,
-      timestamp: todo.timestamp,
-    }));
-    console.log("Last three added todos:", lastThreeTodos);
   };
-
-  // add timestamp to LS if I want to use it as a unique ID??
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
