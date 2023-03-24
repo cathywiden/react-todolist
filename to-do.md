@@ -18,6 +18,7 @@ functionality
 [ ] manual sorting: sort pending && prio on top
 [ ] no empty field is accepted upon editing
 [ ] prio flag overrides timestamp. prio items always on top
+[x] youngest pending task: new item status pending by default, appended to bottom of pending list
 
 general
 [x] basic styling

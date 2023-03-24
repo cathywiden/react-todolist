@@ -15,33 +15,36 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
- const handleCompletion = (id) => {
-   const updatedTodos = todos
-     .map((todo) => {
-       if (todo.id === id) {
-         return {
-           ...todo,
-           completed: !todo.completed,
-           completedTimestamp: todo.completed ? null : new Date().getTime(),
-         };
-       }
-       return todo;
-     })
-     .sort((a, b) => {
-       // Sort pending todos by createdTimestamp in ascending order -- entry that has been waiting for the longest time is on top
-       if (!a.completed && !b.completed) {
-         return a.createdTimestamp - b.createdTimestamp;
-       }
-       // Sort pending todos before completed todos
-       return a.completed ? 1 : -1;
-     });
-   setTodos(updatedTodos);
-   localStorage.setItem("todos", JSON.stringify(updatedTodos));
- };
+  const handleCompletion = (id) => {
+    const updatedTodos = todos
+      .map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+            completedTimestamp: todo.completed ? null : new Date().getTime(),
+          };
+        }
+        return todo;
+      })
+      .sort((a, b) => {
+        // Sort pending todos by createdTimestamp in ascending order -- entry that has been waiting for the longest time is on top
+        if (!a.completed && !b.completed) {
+          return a.createdTimestamp - b.createdTimestamp;
+        }
+        // Sort pending todos before completed todos
+        return a.completed ? 1 : -1;
+      });
+
+      
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  };
 
 
 
-  return (
+  
+    return (
     <div className="tasks-container">
       <div className="tasks">
         {todos.map((todo, index) => (

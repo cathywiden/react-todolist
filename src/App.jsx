@@ -16,11 +16,22 @@ const addTodo = (todo) => {
     const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
     const duplicateTodo = todos.find((a) => a.text === todo.text);
     if (!duplicateTodo) {
-      setTodos([...todos, newTodo]);
-      localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
+      const pendingTasks = todos.filter((task) => !task.completed);
+
+      // new addition := youngest pending task always goes to bottom of pending list
+      setTodos([...pendingTasks, newTodo, ...todos.slice(pendingTasks.length)]);
+      localStorage.setItem(
+        "todos",
+        JSON.stringify([
+          ...pendingTasks,
+          newTodo,
+          ...todos.slice(pendingTasks.length),
+        ])
+      );
     }
   }
 };
+
 
 
   const removeTodo = (id) => {
