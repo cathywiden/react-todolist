@@ -15,6 +15,8 @@ functionality
 [x] add timestamp to LS if I want to store the unique identifier
 [x] add prio flag, store in LS
 [ ] sort based on prio flag && timestamp
+[ ] fix so that on editing entry no empty field is accepted
+[ ] prio flag overrides timestamp. prio items always on top
 
 general
 [x] basic styling

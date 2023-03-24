@@ -12,8 +12,8 @@ const TodoList = () => {
   const addTodo = (todo) => {
     if (todo.text.trim() !== "") {
       const timestamp = new Date().toLocaleString();
-      const newTodo = { ...todo, id: Date.now(), timestamp }; // add timestamp to new todo for a unique identifier for manipulation
-      const duplicateTodo = todos.find((a) => a.text === todo.text); // check for duplicates
+      const newTodo = { ...todo, id: Date.now(), timestamp }; // add timestamp to new todo as uuid
+      const duplicateTodo = todos.find((a) => a.text === todo.text); 
       if (!duplicateTodo) {
         setTodos([...todos, newTodo]);
         localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));

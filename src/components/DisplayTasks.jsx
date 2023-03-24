@@ -15,29 +15,48 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
-  const handleCompletion = (id) => {
-    const updatedTodos = todos
-      .map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-      .sort((a, b) => {
-        if (a.completed === b.completed) {
-          return 0;
-        } else if (a.completed) {
-          return 1;
+
+const handleCompletion = (id) => {
+  const completedTask = todos.find((todo) => todo.id === id);
+  const updatedTodos = todos
+    .filter((todo) => todo.id !== id)
+
+    
+// completed tasks don't need to be sorted based on timestamp so I just add them to the bottom
+    .concat({ 
+      ...completedTask,
+      completed: !completedTask.completed,
+      timestamp: Date.now(),
+    })
+
+
+// I want to sort pending tasks so that oldest entry is on top when I toggle it back to pneding
+    .sort((a, b) => { 
+      if (a.completed === b.completed) {
+        if (!a.completed) {
+          if (a.priority !== b.priority) {
+            return b.priority - a.priority;
+          } else {
+            return a.timestamp - b.timestamp;
+          }
         } else {
-          return -1;
+          return 0;
         }
-      });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  };
+      } else if (a.completed) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
+
+  setTodos(updatedTodos);
+  localStorage.setItem("todos", JSON.stringify(updatedTodos));
+};
+
+
+
+
 
   return (
     <div className="tasks-container">
