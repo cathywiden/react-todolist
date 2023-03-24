@@ -1,5 +1,4 @@
 functionality
-
 [x] generate list -- DisplayTasks.jsx
 [x] add items -- AddTask.jsx
 [x] disallow adding blank tasks
@@ -30,3 +29,6 @@ misc
 [ ] alert upon trying to add blank entries
 [ ] alert upon adding duplicates
 [x] no SPA is complete without a footer
+
+bugs
+[ ] original list disappears if I change status on any item in a search (deleting works!)
