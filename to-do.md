@@ -19,6 +19,7 @@ functionality
 [ ] no empty field is accepted upon editing
 [ ] prio flag overrides timestamp. prio items always on top
 [x] newest/youngest pending task appended to bottom of pending list
+[x] search
 
 general
 [x] basic styling

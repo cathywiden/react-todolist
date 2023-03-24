@@ -8,6 +8,7 @@ const TodoList = () => {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem("todos")) || []
   );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const addTodo = (todo) => {
     if (todo.text.trim() !== "") {
@@ -44,17 +45,31 @@ const TodoList = () => {
     console.log(`Removed todo: ${removedTodo.text}`);
   };
 
+  const filteredTodos = todos.filter((todo) =>
+    todo.text.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <div className="container">
         <AddTask addTodo={addTodo} />
-        {todos.length > 0 ? (
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        {filteredTodos.length > 0 ? (
           <DisplayTasks
-            todos={todos}
+            todos={filteredTodos}
             removeTodo={removeTodo}
             setTodos={setTodos}
           />
-        ) : null}
+        ) : (
+          <p>No results found.</p>
+        )}
       </div>
     </>
   );
