@@ -35,13 +35,25 @@ footer {
   font-size: 0.8em;
 }
 
+.sort-button {
+  margin-left: 10px;
+  background-color: #666;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sort-button:hover {
+  background-color: #555;
+}
+
 .search-container {
  
   display: flex;
   justify-content: center;
  
 }
-
 
 .container {
   max-width: 800px;

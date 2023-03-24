@@ -3,39 +3,41 @@ import AddTask from "./components/AddTask";
 import DisplayTasks from "./components/DisplayTasks";
 import Footer from "./components/Footer";
 
-// Lifting state up
 const TodoList = () => {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem("todos")) || []
   );
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortByPriority, setSortByPriority] = useState(false);
 
   const addTodo = (todo) => {
     if (todo.text.trim() !== "") {
       const timestamp = new Date().toLocaleString();
-      const createdTimestamp = new Date().getTime(); // to calc. time items have been waiting since creation --> sort
+      const createdTimestamp = new Date().getTime();
       const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
+
       const duplicateTodo = todos.find((a) => a.text === todo.text);
       if (!duplicateTodo) {
         const pendingTasks = todos.filter((task) => !task.completed);
-
-        // new addition := youngest pending task always goes to bottom of pending list
-        setTodos([
-          ...pendingTasks,
+        let insertionIndex = pendingTasks.length;
+        for (let i = 0; i < pendingTasks.length; i++) {
+          if (createdTimestamp < pendingTasks[i].createdTimestamp) {
+            insertionIndex = i;
+            break;
+          }
+        }
+        const updatedTodos = [
+          ...todos.slice(0, insertionIndex),
           newTodo,
-          ...todos.slice(pendingTasks.length),
-        ]);
-        localStorage.setItem(
-          "todos",
-          JSON.stringify([
-            ...pendingTasks,
-            newTodo,
-            ...todos.slice(pendingTasks.length),
-          ])
-        );
+          ...todos.slice(insertionIndex),
+        ];
+        setTodos(updatedTodos);
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
       }
     }
   };
+
+
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
@@ -44,6 +46,30 @@ const TodoList = () => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     console.log(`Removed todo: ${removedTodo.text}`);
   };
+
+  const handleSort = () => {
+    const sortedTodos = [...todos];
+    if (sortByPriority) {
+      sortedTodos.sort((a, b) => {
+        if (a.priority === b.priority) {
+          return a.createdTimestamp - b.createdTimestamp;
+        }
+        return a.priority ? -1 : 1;
+      });
+    } else {
+      sortedTodos.sort((a, b) => {
+        if (!a.completed && !b.completed) {
+          return a.createdTimestamp - b.createdTimestamp;
+        }
+        return a.completed ? 1 : -1;
+      });
+    }
+    setTodos(sortedTodos);
+    setSortByPriority(!sortByPriority);
+  };
+
+
+
 
   const filteredTodos = todos.filter((todo) =>
     todo.text.toLowerCase().includes(searchTerm.toLowerCase())
@@ -60,6 +86,9 @@ const TodoList = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button className="sort-button" onClick={handleSort}>
+            {sortByPriority ? <span>&#x2605; up!</span> : "default"}
+          </button>
         </div>
         {filteredTodos.length > 0 ? (
           <DisplayTasks
