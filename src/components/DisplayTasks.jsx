@@ -28,7 +28,7 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
        return todo;
      })
      .sort((a, b) => {
-       // Sort pending todos by createdTimestamp in ascending order -- entry that ahs been waiting for the longest time is on top
+       // Sort pending todos by createdTimestamp in ascending order -- entry that has been waiting for the longest time is on top
        if (!a.completed && !b.completed) {
          return a.createdTimestamp - b.createdTimestamp;
        }
