@@ -72,7 +72,7 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
               className="completion-button"
               onClick={() => handleCompletion(todo.id)}
             >
-              {todo.completed ? <span>&#x1F60E;</span> : <span>&#x1F614;</span>}
+              {todo.completed ? <span>✅</span> : <span>&#x1F614;</span>}
             </button>
           </div>
         ))}

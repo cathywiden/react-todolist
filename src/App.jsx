@@ -85,15 +85,17 @@ const TodoList = () => {
             {sortByPriority ? <span>&#x2605;</span> : "default"}
           </button>
         </div>
-        {filteredTodos.length > 0 ? (
-          <DisplayTasks
-            todos={filteredTodos}
-            removeTodo={removeTodo}
-            setTodos={setTodos}
-          />
-        ) : (
-          <p>no results found</p>
-        )}
+        <div className="results-container">
+          {filteredTodos.length > 0 ? (
+            <DisplayTasks
+              todos={filteredTodos}
+              removeTodo={removeTodo}
+              setTodos={setTodos}
+            />
+          ) : (
+            <p>no results found</p>
+          )}
+        </div>
       </div>
     </>
   );
