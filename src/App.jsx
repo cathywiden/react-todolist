@@ -4,6 +4,7 @@ import DisplayTasks from "./components/DisplayTasks";
 import Footer from "./components/Footer";
 import DateDisplay from "./components/DateDisplay";
 import SearchPrioSorting from "./components/SearchPrioSorting";
+import CompletedTasksCounter from "./components/CompletedTasksCounter";
 
 const TodoList = () => {
   const [todos, setTodos] = useState(
@@ -46,7 +47,7 @@ const TodoList = () => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     //console.log(`Removed todo: ${removedTodo.text}`);
   };
-  
+
   const handleSort = () => {
     const sortedTodos = [...todos];
     if (sortByPriority) {
@@ -84,6 +85,8 @@ const TodoList = () => {
           setSearchTerm={setSearchTerm}
         />
 
+        <CompletedTasksCounter todos={todos} />
+
         <div className="results-container">
           {filteredTodos.length > 0 ? (
             <DisplayTasks
@@ -115,4 +118,3 @@ const App = () => {
 };
 
 export default App;
-

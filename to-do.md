@@ -18,6 +18,7 @@ functionality
 [x] no empty fields after editing -- see bug2!
 [x] newest/youngest pending task appended to bottom of pending list
 [x] search
+[x] completed tasks counter
 
 
 general
