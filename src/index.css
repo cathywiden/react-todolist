@@ -60,6 +60,17 @@ main {
   border-radius: 5px
 }
 
+.input,
+.task-input {
+  border: none;
+  outline: none;
+  height: 1.2rem;
+  border-radius: 3px;
+  margin-left: 5px;
+  margin-right: 10px;
+  width: 80%
+}
+
 .buttons {
   display: grid;
   grid-gap: 10px;
@@ -121,14 +132,7 @@ main {
   justify-content: center
 }
 
-.input,
-.task-input {
-  border: none;
-  outline: none;
-  height: 1.2rem;
-  border-radius: 3px;
-  margin-left: -25px
-}
+
 
 .tasks {
   display: grid;
