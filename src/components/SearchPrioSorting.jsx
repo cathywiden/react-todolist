@@ -1,6 +1,9 @@
-import React from "react";
-
-const SearchPrioSorting = ({ handleSort, sortByPriority, searchTerm, setSearchTerm }) => {
+const SearchPrioSorting = ({
+  handleSort,
+  sortByPriority,
+  searchTerm,
+  setSearchTerm,
+}) => {
   return (
     <div className="search-container">
       <input
