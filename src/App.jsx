@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AddTask from "./components/AddTask";
 import DisplayTasks from "./components/DisplayTasks";
 import Footer from "./components/Footer";
+import DateDisplay from "./components/DateDisplay";
+import SearchPrioSorting from "./components/SearchPrioSorting";
 
 const TodoList = () => {
   const [todos, setTodos] = useState(
@@ -73,26 +75,15 @@ const TodoList = () => {
   return (
     <>
       <div className="container">
-        <div className="date">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </div>
+        <DateDisplay />
         <AddTask addTodo={addTodo} />
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className="sort-button" onClick={handleSort}>
-            {sortByPriority ? <span>&#x2605;</span> : "default"}
-          </button>
-        </div>
+        <SearchPrioSorting
+          handleSort={handleSort}
+          sortByPriority={sortByPriority}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+
         <div className="results-container">
           {filteredTodos.length > 0 ? (
             <DisplayTasks
