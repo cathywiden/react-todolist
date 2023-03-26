@@ -85,19 +85,22 @@ const TodoList = () => {
           setSearchTerm={setSearchTerm}
         />
 
-        <CompletedTasksCounter todos={todos} />
-
-        <div className="results-container">
-          {filteredTodos.length > 0 ? (
-            <DisplayTasks
-              todos={filteredTodos}
-              removeTodo={removeTodo}
-              setTodos={setTodos}
-            />
-          ) : (
-            <p>no results found</p>
-          )}
-        </div>
+        {todos.length > 0 && (
+          <>
+            <CompletedTasksCounter todos={todos} />
+            <div className="results-container">
+              {filteredTodos.length > 0 ? (
+                <DisplayTasks
+                  todos={filteredTodos}
+                  removeTodo={removeTodo}
+                  setTodos={setTodos}
+                />
+              ) : (
+                <p>no results found</p>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );
