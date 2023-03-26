@@ -52,7 +52,7 @@ main {
 
 .task {
   background-color: white;
-  width: 350px;
+  width: 300px;
   padding-left: 5px;
   display: flex;
   align-items: flex-start;
@@ -78,7 +78,7 @@ main {
   background: white;
   border: none;
   margin-right: 5px;
-  margin-left: 5px;
+  margin-left: 0px;
   padding: 0px;
   height: 1.3rem;
   width: 25px;
@@ -126,7 +126,8 @@ main {
   border: none;
   outline: none;
   height: 1.2rem;
-  border-radius: 3px
+  border-radius: 3px;
+  margin-left: -25px
 }
 
 .tasks {

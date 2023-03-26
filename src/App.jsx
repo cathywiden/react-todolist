@@ -44,7 +44,7 @@ const TodoList = () => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     //console.log(`Removed todo: ${removedTodo.text}`);
   };
-
+  
   const handleSort = () => {
     const sortedTodos = [...todos];
     if (sortByPriority) {
@@ -116,3 +116,4 @@ const App = () => {
 };
 
 export default App;
+

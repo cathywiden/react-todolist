@@ -1,4 +1,5 @@
 functionality
+
 [x] generate list -- DisplayTasks.jsx
 [x] add items -- AddTask.jsx
 [x] disallow adding blank tasks
@@ -14,21 +15,28 @@ functionality
 [x] timestamp all entries: Date.now() in LS
 [x] add prio flag && store in LS
 [x] manual sorting: sort prio on top
-[ ] no empty field accepted after editing entries
+[x] no empty fields after editing -- see bug2!
 [x] newest/youngest pending task appended to bottom of pending list
 [x] search
-[ ] auto refresh displayed list on prio flag add/deletion
+
 
 general
+
 [x] basic styling
 [x] structure
 [ ] clean up code
 [x] use at least 3 components
+[ ] refactor App.jsx
+
 
 misc
+
 [ ] alert upon trying to add blank entries
 [ ] alert upon adding duplicates
 [x] no SPA is complete without a footer
 
+
 bugs
+
 [ ] original list disappears if I change status on any item in a search (deleting works!)
+[?] partial fix: text fields can be edited except first character with Back key. Can be edited fully if selected with mouse and overwritten. 

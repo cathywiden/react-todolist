@@ -56,6 +56,7 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
             >
               {todo.priority ? <span>&#x2605;</span> : <span>&#x2606;</span>}
             </button>
+
             <input
               type="text"
               value={todo.text}
@@ -63,16 +64,29 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
               onChange={(e) =>
                 setTodos(
                   todos.map((t) =>
-                    t.id === todo.id ? { ...t, text: e.target.value } : t
+                    t.id === todo.id
+                      ? { ...t, text: e.target.value || t.text }
+                      : t
                   )
                 )
               }
+              onBlur={(e) =>
+                setTodos(
+                  todos.map((t) =>
+                    t.id === todo.id && e.target.value.trim() !== ""
+                      ? { ...t, text: e.target.value.trim() }
+                      : t
+                  )
+                )
+              }
+              required // rough & incomplete bugfix, see to-do.md bug2
             />
+
             <button
               className="completion-button"
               onClick={() => handleCompletion(todo.id)}
             >
-              {todo.completed ? <span>✅</span> : <span>&#x1F614;</span>}
+              {todo.completed ? <span>&#x1F60E;</span> : <span>&#x1F614;</span>}
             </button>
           </div>
         ))}
