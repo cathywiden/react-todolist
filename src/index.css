@@ -7,11 +7,17 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f5f5;
-  padding: 0
 }
 
 main {
-  margin: 50px
+  margin: 30px
+}
+
+.date {
+display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .App-header {
@@ -68,7 +74,7 @@ main {
   border-radius: 3px;
   margin-left: 5px;
   margin-right: 10px;
-  width: 80%
+  width: 80%;
 }
 
 .buttons {

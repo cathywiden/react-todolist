@@ -73,6 +73,14 @@ const TodoList = () => {
   return (
     <>
       <div className="container">
+        <div className="date">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
         <AddTask addTodo={addTodo} />
         <div className="search-container">
           <input
