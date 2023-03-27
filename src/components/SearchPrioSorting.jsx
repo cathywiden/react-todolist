@@ -11,7 +11,7 @@ const SearchPrioSorting = ({
     <div className="search-container">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

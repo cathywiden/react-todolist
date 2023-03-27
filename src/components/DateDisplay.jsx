@@ -1,13 +1,8 @@
 import React from "react";
 
 const DateDisplay = () => {
-  const currentDate = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
+  const currentDate = new Date().toLocaleDateString("en-GB");
+  
   return (
     <div className="date">
       <span>{currentDate}</span>

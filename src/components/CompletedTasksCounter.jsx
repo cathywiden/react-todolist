@@ -10,7 +10,7 @@ const CompletedTasksCounter = ({ todos }) => {
   return (
     <div className="completed-tasks-counter">
       <p>
-        Completed tasks: <span>{completedTasksCount}</span>
+        completed tasks: <span>{completedTasksCount}</span>
       </p>
     </div>
   );

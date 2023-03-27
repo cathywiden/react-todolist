@@ -12,33 +12,40 @@ const TodoList = () => {
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [sortByPriority, setSortByPriority] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  const addTodo = (todo) => {
-    if (todo.text.trim() !== "") {
-      const timestamp = new Date().toLocaleString();
-      const createdTimestamp = new Date().getTime();
-      const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
+ const addTodo = (todo) => {
+   if (todo.text.trim() !== "") {
+     const timestamp = new Date().toLocaleString();
+     const createdTimestamp = new Date().getTime();
+     const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
 
-      const duplicateTodo = todos.find((a) => a.text === todo.text);
-      if (!duplicateTodo) {
-        const pendingTasks = todos.filter((task) => !task.completed);
-        let insertionIndex = pendingTasks.length;
-        for (let i = 0; i < pendingTasks.length; i++) {
-          if (createdTimestamp < pendingTasks[i].createdTimestamp) {
-            insertionIndex = i;
-            break;
-          }
-        }
-        const updatedTodos = [
-          ...todos.slice(0, insertionIndex),
-          newTodo,
-          ...todos.slice(insertionIndex),
-        ];
-        setTodos(updatedTodos);
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
-      }
-    }
-  };
+     const duplicateTodo = todos.find((a) => a.text === todo.text);
+     if (!duplicateTodo) {
+       const pendingTasks = todos.filter((task) => !task.completed);
+       let insertionIndex = pendingTasks.length;
+       for (let i = 0; i < pendingTasks.length; i++) {
+         if (createdTimestamp < pendingTasks[i].createdTimestamp) {
+           insertionIndex = i;
+           break;
+         }
+       }
+       const updatedTodos = [
+         ...todos.slice(0, insertionIndex),
+         newTodo,
+         ...todos.slice(insertionIndex),
+       ];
+       setTodos(updatedTodos);
+       localStorage.setItem("todos", JSON.stringify(updatedTodos));
+       setHasError(false);
+     } else {
+       setHasError(true);
+     }
+   } else {
+     setHasError(true);
+   }
+ };
+
 
   const removeTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
