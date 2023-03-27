@@ -4,7 +4,7 @@ const CompletedTasksCounter = ({ todos }) => {
   const completedTasksCount = todos.filter((todo) => todo.completed).length;
 
   if (completedTasksCount === 0) {
-    return null; 
+    return null;
   }
 
   return (

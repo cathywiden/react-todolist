@@ -1,6 +1,6 @@
 import React from "react";
 
-// Sorting accordin to prio flag and search are bundled in here
+// Sorting according to prio flag and search are bundled in here
 const SearchPrioSorting = ({
   handleSort,
   sortByPriority,
