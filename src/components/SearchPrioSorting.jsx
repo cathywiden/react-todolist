@@ -1,19 +1,30 @@
 import React from "react";
 
-// Sorting according to prio flag and search are bundled in here
 const SearchPrioSorting = ({
   handleSort,
   sortByPriority,
   searchTerm,
   setSearchTerm,
+  todos,
+  setFilteredTodos,
 }) => {
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    const filteredTodos = todos.filter((todo) =>
+      todo.text.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTodos(filteredTodos);
+    localStorage.setItem("todos", JSON.stringify(filteredTodos));
+  };
+
   return (
     <div className="search-container">
       <input
         type="text"
         placeholder="search"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearch}
       />
       <button className="sort-button" onClick={handleSort}>
         {sortByPriority ? <span>&#x2605;</span> : "default"}
@@ -21,5 +32,4 @@ const SearchPrioSorting = ({
     </div>
   );
 };
-
 export default SearchPrioSorting;

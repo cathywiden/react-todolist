@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
 import DisplayTasks from "./components/DisplayTasks";
 import Footer from "./components/Footer";
@@ -7,12 +7,20 @@ import SearchPrioSorting from "./components/SearchPrioSorting";
 import CompletedTasksCounter from "./components/CompletedTasksCounter";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState(
+  const [originalTodos, setOriginalTodos] = useState(
     JSON.parse(localStorage.getItem("todos")) || []
   );
+  const [filteredTodos, setFilteredTodos] = useState(originalTodos);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortByPriority, setSortByPriority] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(originalTodos));
+    if (searchTerm === "") {
+      setFilteredTodos(originalTodos);
+    }
+  }, [originalTodos, searchTerm]);
 
   const addTodo = (todo) => {
     if (todo.text.trim() !== "") {
@@ -20,9 +28,9 @@ const TodoList = () => {
       const createdTimestamp = new Date().getTime();
       const newTodo = { ...todo, id: Date.now(), timestamp, createdTimestamp };
 
-      const duplicateTodo = todos.find((a) => a.text === todo.text);
+      const duplicateTodo = originalTodos.find((a) => a.text === todo.text);
       if (!duplicateTodo) {
-        const pendingTasks = todos.filter((task) => !task.completed);
+        const pendingTasks = originalTodos.filter((task) => !task.completed);
         let insertionIndex = pendingTasks.length;
         for (let i = 0; i < pendingTasks.length; i++) {
           if (createdTimestamp < pendingTasks[i].createdTimestamp) {
@@ -31,12 +39,16 @@ const TodoList = () => {
           }
         }
         const updatedTodos = [
-          ...todos.slice(0, insertionIndex),
+          ...originalTodos.slice(0, insertionIndex),
           newTodo,
-          ...todos.slice(insertionIndex),
+          ...originalTodos.slice(insertionIndex),
         ];
-        setTodos(updatedTodos);
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        setOriginalTodos(updatedTodos);
+        setFilteredTodos(
+          updatedTodos.filter((todo) =>
+            todo.text.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        );
         setHasError(false);
       } else {
         setHasError(true);
@@ -47,15 +59,13 @@ const TodoList = () => {
   };
 
   const removeTodo = (id) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    //const removedTodo = todos.find((todo) => todo.id === id);
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    //console.log(`Removed todo: ${removedTodo.text}`);
+    const updatedTodos = originalTodos.filter((todo) => todo.id !== id);
+    setOriginalTodos(updatedTodos);
+    setFilteredTodos(filteredTodos.filter((todo) => todo.id !== id));
   };
 
   const handleSort = () => {
-    const sortedTodos = [...todos];
+    const sortedTodos = [...filteredTodos];
     if (sortByPriority) {
       sortedTodos.sort((a, b) => {
         if (a.priority === b.priority) {
@@ -71,14 +81,19 @@ const TodoList = () => {
         return a.completed ? 1 : -1;
       });
     }
-    setTodos(sortedTodos);
+    setFilteredTodos(sortedTodos);
     setSortByPriority(!sortByPriority);
   };
 
-  const filteredTodos = todos.filter((todo) =>
-    todo.text.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setSearchTerm(event.target.value);
+    const filteredTodos = originalTodos.filter((todo) =>
+      todo.text.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setFilteredTodos(filteredTodos);
+    localStorage.setItem("todos", JSON.stringify(filteredTodos));
+  };
   return (
     <>
       <div className="container">
@@ -87,26 +102,31 @@ const TodoList = () => {
         <SearchPrioSorting
           handleSort={handleSort}
           sortByPriority={sortByPriority}
-          searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          todos={filteredTodos}
+          setFilteredTodos={setFilteredTodos}
         />
-
-        {todos.length > 0 && (
+        {filteredTodos.length > 0 && (
           <>
-            <CompletedTasksCounter todos={todos} />
+            <CompletedTasksCounter todos={filteredTodos} />
             <div className="results-container">
-              {filteredTodos.length > 0 ? (
-                <DisplayTasks
-                  todos={filteredTodos}
-                  removeTodo={removeTodo}
-                  setTodos={setTodos}
-                />
-              ) : (
-                <p>no results found</p>
-              )}
+              <DisplayTasks
+                todos={filteredTodos}
+                removeTodo={removeTodo}
+                setTodos={setFilteredTodos}
+                originalTodos={originalTodos}
+              />
             </div>
           </>
         )}
+        {filteredTodos.length === 0 && (
+          <>
+            <CompletedTasksCounter todos={filteredTodos} />
+            <p className="no-tasks">No tasks to display</p>
+          </>
+        )}
+
       </div>
     </>
   );

@@ -36,6 +36,6 @@ misc
 
 bugs
 
-[ ] original list disappears if I change status on any item in a search (deleting works!)
+[x] original list disappears if I change status on any item in a search (deleting works!)
 [?] partial fix: text fields can be edited except first character with Back key. Can be edited fully if selected with mouse and overwritten. 
 [ ] alert on adding duplicates
