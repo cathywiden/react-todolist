@@ -9,7 +9,7 @@ const AddTask = ({ addTodo, todos }) => {
     if (inputValue.trim() === "") {
       setErrorMessage("no empty fields");
     } else if (todos.find((todo) => todo.text === inputValue)) {
-      setErrorMessage("duplicate entry");
+      setErrorMessage("this todo already exists");
     } else {
       setErrorMessage("");
       addTodo({
