@@ -184,7 +184,7 @@ footer {
 
 .form-input.error input,
 .form-input input:invalid {
-  background-color: rgb(255, 221, 0);
+  background-color: rgb(255, 234, 98);
   border-radius: 2px;
 }
 
