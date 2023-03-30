@@ -1,6 +1,12 @@
 import React from "react";
 
-const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
+const DisplayTasks = ({
+  todos,
+  removeTodo,
+  setTodos,
+  originalTodos,
+  setOriginalTodos,
+}) => {
   const handlePriority = (id) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -32,12 +38,32 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
         if (!a.completed && !b.completed) {
           return a.createdTimestamp - b.createdTimestamp;
         }
-        // Sort pending todos before completed todos
         return a.completed ? 1 : -1;
       });
 
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+    const updatedOriginalTodos = originalTodos
+      .map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+            completedTimestamp: todo.completed ? null : new Date().getTime(),
+          };
+        }
+        return todo;
+      })
+      .sort((a, b) => {
+        if (!a.completed && !b.completed) {
+          return a.createdTimestamp - b.createdTimestamp;
+        }
+        return a.completed ? 1 : -1;
+      });
+
+    setOriginalTodos(updatedOriginalTodos);
+    localStorage.setItem("originalTodos", JSON.stringify(updatedOriginalTodos));
   };
 
   return (
@@ -79,7 +105,7 @@ const DisplayTasks = ({ todos, removeTodo, setTodos }) => {
                   )
                 )
               }
-              required // rough & incomplete bugfix, see to-do.md bug2
+              required // rough & incomplete bugfix
             />
 
             <button

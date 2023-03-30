@@ -5,17 +5,16 @@ const SearchPrioSorting = ({
   sortByPriority,
   searchTerm,
   setSearchTerm,
-  todos,
+  originalTodos,
   setFilteredTodos,
 }) => {
   const handleSearch = (event) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-    const filteredTodos = todos.filter((todo) =>
-      todo.text.toLowerCase().includes(value.toLowerCase())
+    event.preventDefault();
+    setSearchTerm(event.target.value);
+    const filteredTodos = originalTodos.filter((todo) =>
+      todo.text.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setFilteredTodos(filteredTodos);
-    localStorage.setItem("todos", JSON.stringify(filteredTodos));
   };
 
   return (
@@ -32,4 +31,5 @@ const SearchPrioSorting = ({
     </div>
   );
 };
+
 export default SearchPrioSorting;

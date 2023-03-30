@@ -85,28 +85,26 @@ const TodoList = () => {
     setSortByPriority(!sortByPriority);
   };
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setSearchTerm(event.target.value);
-    const filteredTodos = originalTodos.filter((todo) =>
-      todo.text.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setFilteredTodos(filteredTodos);
-    localStorage.setItem("todos", JSON.stringify(filteredTodos));
-  };
   return (
     <>
       <div className="container">
         <DateDisplay />
-        <AddTask addTodo={addTodo} />
+        <AddTask
+          addTodo={addTodo}
+          todos={originalTodos}
+          hasError={hasError}
+          setHasError={setHasError}
+        />
+
         <SearchPrioSorting
           handleSort={handleSort}
           sortByPriority={sortByPriority}
           setSearchTerm={setSearchTerm}
           searchTerm={searchTerm}
-          todos={filteredTodos}
+          originalTodos={originalTodos}
           setFilteredTodos={setFilteredTodos}
         />
+
         {filteredTodos.length > 0 && (
           <>
             <CompletedTasksCounter todos={filteredTodos} />
@@ -116,6 +114,7 @@ const TodoList = () => {
                 removeTodo={removeTodo}
                 setTodos={setFilteredTodos}
                 originalTodos={originalTodos}
+                setOriginalTodos={setOriginalTodos}
               />
             </div>
           </>
@@ -126,7 +125,6 @@ const TodoList = () => {
             <p className="no-tasks">No tasks to display</p>
           </>
         )}
-
       </div>
     </>
   );

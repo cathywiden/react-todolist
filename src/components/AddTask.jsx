@@ -1,36 +1,38 @@
 import React, { useState } from "react";
 
-const AddTask = ({ addTodo }) => {
+const AddTask = ({ addTodo, todos }) => {
   const [inputValue, setInputValue] = useState("");
-  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.trim() !== "") {
-      setHasError(false);
+    if (inputValue.trim() === "") {
+      setErrorMessage("no empty fields");
+    } else if (todos.find((todo) => todo.text === inputValue)) {
+      setErrorMessage("duplicate entry");
+    } else {
+      setErrorMessage("");
       addTodo({
         text: inputValue,
         completed: false,
       });
       setInputValue("");
-    } else {
-      setHasError(true);
     }
   };
 
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
-        <div className={hasError ? "form-input error" : "form-input"}>
+        <div className={`form-input ${errorMessage ? "error" : ""}`}>
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="type here"
           />
-
           <button type="submit">add task</button>
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );

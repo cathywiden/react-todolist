@@ -15,7 +15,7 @@ functionality
 [x] newest/youngest pending task appended to bottom of pending list
 [x] search
 [x] completed tasks counter
-
+[x] alert on adding duplicates
 
 general
 
@@ -30,12 +30,11 @@ general
 misc
 
 [x] highlight input field upon trying to add blank entries
-[ ] alert upon adding duplicates
+[x] alert upon adding duplicates
 [x] no SPA is complete without a footer
 
 
 bugs
 
-[x] original list disappears if I change status on any item in a search (deleting works!)
 [?] partial fix: text fields can be edited except first character with Back key. Can be edited fully if selected with mouse and overwritten. 
-[ ] alert on adding duplicates
+

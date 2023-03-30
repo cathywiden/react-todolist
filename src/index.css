@@ -178,7 +178,17 @@ footer {
   opacity: 80%
 }
 
-.form-input.error input {
+.form-input input {
+  background-color: white;
+}
+
+.form-input.error input,
+.form-input input:invalid {
   background-color: yellow;
   border-radius: 2px;
+}
+
+.no-tasks,
+.error-message {
+  text-align: center;
 }
