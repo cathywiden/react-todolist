@@ -7,6 +7,11 @@ const DisplayTasks = ({
   originalTodos,
   setOriginalTodos,
 }) => {
+  const updateTodosAndLocalStorage = (updatedTodos, updatedOriginalTodos) => {
+    setTodos(updatedTodos);
+    setOriginalTodos(updatedOriginalTodos);
+    localStorage.setItem("originalTodos", JSON.stringify(updatedOriginalTodos));
+  };
   const handlePriority = (id) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -65,6 +70,15 @@ const DisplayTasks = ({
     setOriginalTodos(updatedOriginalTodos);
     localStorage.setItem("originalTodos", JSON.stringify(updatedOriginalTodos));
   };
+  const handleTodoEdit = (id, newText) => {
+    const updatedTodos = todos.map((t) =>
+      t.id === id ? { ...t, text: newText } : t
+    );
+    const updatedOriginalTodos = originalTodos.map((t) =>
+      t.id === id ? { ...t, text: newText } : t
+    );
+    updateTodosAndLocalStorage(updatedTodos, updatedOriginalTodos);
+  };
 
   return (
     <div className="tasks-container">
@@ -96,25 +110,11 @@ const DisplayTasks = ({
                   )
                 )
               }
-              onBlur={(e) => {
-                if (e.target.value.trim() !== "") {
-                  setTodos(
-                    todos.map((t) =>
-                      t.id === todo.id
-                        ? { ...t, text: e.target.value.trim() }
-                        : t
-                    )
-                  );
-                  setOriginalTodos(
-                    originalTodos.map((t) =>
-                      t.id === todo.id
-                        ? { ...t, text: e.target.value.trim() }
-                        : t
-                    )
-                  );
-                }
-              }}
-              required // rough & incomplete bugfix
+              onBlur={(e) =>
+                e.target.value.trim() !== "" &&
+                handleTodoEdit(todo.id, e.target.value.trim())
+              }
+              required
             />
 
             <button
