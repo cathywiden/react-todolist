@@ -96,15 +96,24 @@ const DisplayTasks = ({
                   )
                 )
               }
-              onBlur={(e) =>
-                setTodos(
-                  todos.map((t) =>
-                    t.id === todo.id && e.target.value.trim() !== ""
-                      ? { ...t, text: e.target.value.trim() }
-                      : t
-                  )
-                )
-              }
+              onBlur={(e) => {
+                if (e.target.value.trim() !== "") {
+                  setTodos(
+                    todos.map((t) =>
+                      t.id === todo.id
+                        ? { ...t, text: e.target.value.trim() }
+                        : t
+                    )
+                  );
+                  setOriginalTodos(
+                    originalTodos.map((t) =>
+                      t.id === todo.id
+                        ? { ...t, text: e.target.value.trim() }
+                        : t
+                    )
+                  );
+                }
+              }}
               required // rough & incomplete bugfix
             />
 

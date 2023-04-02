@@ -16,6 +16,7 @@ functionality
 [x] search
 [x] completed tasks counter
 [x] alert on adding duplicates
+[x] edits persist
 
 general
 
@@ -36,5 +37,5 @@ misc
 
 bugs
 
-[?] partial fix: text fields can be edited except first character with Back key. Can be edited fully if selected with mouse and overwritten. 
+[?] partial fix: text fields can be edited except first character with Back key. Can be edited fully if selected with mouse and overwritten
 
